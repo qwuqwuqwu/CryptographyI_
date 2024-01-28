@@ -49,20 +49,17 @@ def findaZ(input, mask):
     # print(mask)
 
 def main2():
-    # key = random(1024)
-    # ciphertexts = [encrypt(key, msg) for msg in MSGS]
-    # test = strxor(ct_a, ct_b)
-    # print(len(test))
-    # print(test)
+    # for each cipher text(pick)
+    # 1. xor pick with other cipher text
+    # 2. find a-zA-Z in xored results and make a mask
+    # index of a-zA-Z in the mask is labeled if every xor results hits
+    # 3. the labeled position has a higher chance that in original pick plain text this position has a string space(" ")
 
     ct = []
     pt = []
     for i in range(len(ct_string)):
         ct.append(bytes.fromhex(ct_string[i]))
         pt.append([95]*len(ct[i]))
-
-    mask = [0] * len(list(cta))
-    findaZ(list(cta), mask)
 
     ct_xor_others = [0] * len(ct[0])
     ct_xor_len = [0] * len(ct[0])
@@ -109,7 +106,7 @@ def main2():
     for pick in range(len(ct)):
         print(bytes(pt[pick]).swapcase())
 
-def main():
+def main1():
     # key = random(1024)
     # ciphertexts = [encrypt(key, msg) for msg in MSGS]
     # test = strxor(ct_a, ct_b)
