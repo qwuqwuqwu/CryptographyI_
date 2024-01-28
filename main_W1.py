@@ -9,6 +9,7 @@ key = '66396e89c9dbd8cc9874352acd6395102eafce78aa7fed28a07f6bc98d29c50b69b0339a1
 key = '66396e89c9dbd8cc9874352acd6395102eafce78aa7fed28a07f6bc98d29c50b69b0339a19f8aa401a9c6d708f80c066c763fef0123148cdd8e802d05ba98777335daefcecd59c433a6b268b60bf4ef0' # by 1
 key = '66396e89c9dbd8cc9874352acd6395102eafce78aa7fed28a07f6bc98d29c50b69b0339a19f8aa401a9c6d708f80c066c763fef0123148cdd8e802d05ba98777335daefcecd59c433a6b268b60bf4ef03c9a611098bb3e9a3161edc7b804a33522cfd202d2c68c57376edba8c2ca50027c6124' # by 7
 
+# ct_string is cipher text string from the assignments
 ct_string = []
 #                 |1   |    |2   |    |3   |    |4   |    |5   |    |6   |    |7   |    |8   |    |
 ct_string.append("315c4eeaa8b5f8aaf9174145bf43e1784b8fa00dc71d885a804e5ee9fa40b16349c146fb778cdf2d3aff021dfff5b403b510d0d0455468aeb98622b137dae857553ccd8883a7bc37520e06e515d22c954eba5025b8cc57ee59418ce7dc6bc41556bdb36bbca3e8774301fbcaa3b83b220809560987815f65286764703de0f3d524400a19b159610b11ef3e")
@@ -23,7 +24,6 @@ ct_string.append("271946f9bbb2aeadec111841a81abc300ecaa01bd8069d5cc91005e9fe4aad
 ct_string.append("466d06ece998b7a2fb1d464fed2ced7641ddaa3cc31c9941cf110abbf409ed39598005b3399ccfafb61d0315fca0a314be138a9f32503bedac8067f03adbf3575c3b8edc9ba7f537530541ab0f9f3cd04ff50d66f1d559ba520e89a2cb2a83")
 ct_string.append("32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e9052ba6a8cd8257bf14d13e6f0a803b54fde9e77472dbff89d71b57bddef121336cb85ccb8f3315f4b52e301d16e9f52f904")
 
-
 def strxor(a, b):     # xor two strings of different lengths
     if len(a) > len(b):
        return "".join([chr(ord(x) ^ ord(y)) for (x, y) in zip(a[:len(b)], b)])
@@ -36,16 +36,8 @@ def bytesxor(a, b):
     else:
         return [x ^ y for (x, y) in zip(a, b[:len(a)])]
 
-# def random(size=16):
-#     return open("/dev/urandom").read(size)
-
-# def encrypt(key, msg):
-#     c = strxor(key, msg)
-#     print
-#     print c.encode('hex')
-#     return c
-
 def findaZ(input, mask):
+# find a-zA-Z string in input and label corresponding bit in mask
     target = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     target = target.encode(encoding='ascii')
     target = list(target)
@@ -190,6 +182,7 @@ def main():
         print('|||||||||||||||||||||||||||||||')
 
 def main_calculator():
+    # this function is to calculate all plain text from the guessed key and cipher
     ct = []
     for i in range(len(ct_string)):
         ct.append(bytes.fromhex(ct_string[i]))
@@ -208,4 +201,7 @@ def main_test():
     b = bytes.fromhex(b)
     bytesxor(a, b)
 
-main_calculator()
+def main():
+    main_calculator()
+
+main()
