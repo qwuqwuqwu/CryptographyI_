@@ -199,6 +199,8 @@ def main_test():
     bytesxor(a, b)
 
 def main():
+    # main2()
+    # main1()
     main_calculator()
 
 main()
